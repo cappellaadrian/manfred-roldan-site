@@ -715,7 +715,7 @@
     align-items: start;
   }
   .sobre-portrait { aspect-ratio: 4/5; position: relative; overflow: hidden; background: rgba(14,13,44,0.05); }
-  .sobre-portrait image-slot { width: 100%; height: 100%; display: block; --slot-bg: rgba(14,13,44,0.06); --slot-border: rgba(14,13,44,0.2); --slot-text: rgba(14,13,44,0.6); }
+  .sobre-portrait-img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .sobre-portrait .tag {
     position: absolute; bottom: 16px; left: 16px;
     font-family: var(--font-display); font-size: 10px;
@@ -1412,9 +1412,9 @@
             <a href="#contacto" class="servicio-cta">Empezar por aquí <span class="arrow">→</span></a>
           </div>
           <div class="servicio-meta">
-            <div class="row"><span class="k">Mínimo</span><span class="v">US$ 100 K</span></div>
             <div class="row"><span class="k">Horizonte</span><span class="v">5–15 años</span></div>
             <div class="row"><span class="k">Idioma</span><span class="v">ES · EN</span></div>
+            <div class="row"><span class="k">Formato</span><span class="v">Presencial · Remoto</span></div>
           </div>
         </article>
 
@@ -1435,9 +1435,9 @@
             <a href="#contacto" class="servicio-cta">Solicitar memorándum <span class="arrow">→</span></a>
           </div>
           <div class="servicio-meta">
-            <div class="row"><span class="k">Mínimo</span><span class="v">US$ 50 K</span></div>
             <div class="row"><span class="k">Horizonte</span><span class="v">3–7 años</span></div>
-            <div class="row"><span class="k">Rendimiento</span><span class="v">8–11% bruto</span></div>
+            <div class="row"><span class="k">Moneda</span><span class="v">US$ · ₡</span></div>
+            <div class="row"><span class="k">Reporte</span><span class="v">Trimestral</span></div>
           </div>
         </article>
 
@@ -1458,9 +1458,9 @@
             <a href="#contacto" class="servicio-cta">Agendar revisión <span class="arrow">→</span></a>
           </div>
           <div class="servicio-meta">
-            <div class="row"><span class="k">Mínimo</span><span class="v">US$ 250 K AUM</span></div>
             <div class="row"><span class="k">Frecuencia</span><span class="v">Trimestral</span></div>
             <div class="row"><span class="k">Honorarios</span><span class="v">Fijos · sin comisión</span></div>
+            <div class="row"><span class="k">Alcance</span><span class="v">Independiente</span></div>
           </div>
         </article>
 
@@ -1481,9 +1481,9 @@
             <a href="#contacto" class="servicio-cta">Conversar en privado <span class="arrow">→</span></a>
           </div>
           <div class="servicio-meta">
-            <div class="row"><span class="k">Patrimonio</span><span class="v">Desde US$ 500 K</span></div>
             <div class="row"><span class="k">Plazo de diseño</span><span class="v">4–6 meses</span></div>
             <div class="row"><span class="k">Confidencialidad</span><span class="v">Total</span></div>
+            <div class="row"><span class="k">Coordinación</span><span class="v">Legal · Notarial</span></div>
           </div>
         </article>
 
@@ -1640,7 +1640,7 @@
 
       <div class="sobre-grid">
         <div class="sobre-portrait">
-          <image-slot id="portrait-manfred" shape="rect" placeholder="Retrato editorial — Manfred, plano americano, fondo neutro"></image-slot>
+          <img class="sobre-portrait-img" src="assets/portrait-manfred.jpg" alt="Manfred Roldán" loading="lazy" onerror="this.style.display='none'">
           <span class="tag">Manfred · 2024</span>
         </div>
         <div class="sobre-body">
@@ -1663,8 +1663,8 @@
               <div class="value">Transcomer CR</div>
             </div>
             <div class="credential">
-              <div class="label">Licencia</div>
-              <div class="value">SUGEVAL · activa</div>
+              <div class="label">Base</div>
+              <div class="value">Barrio Escalante · CR</div>
             </div>
             <div class="credential">
               <div class="label">Idiomas</div>
@@ -1763,12 +1763,12 @@
         <details class="faq-item">
           <summary class="faq-q">
             <span class="index">01</span>
-            <span class="label">¿Cuál es el monto mínimo para trabajar conmigo?</span>
+            <span class="label">¿Cómo empezamos a trabajar juntos?</span>
             <span class="toggle" aria-hidden="true"></span>
           </summary>
           <div class="faq-a"><div class="faq-a-inner">
-            <p>Depende del mandato. La planificación patrimonial empieza en US$ 100 000. La asesoría de portafolio asume al menos US$ 250 000 en activos bajo administración. Los productos inmobiliarios MACAB tienen tickets desde US$ 50 000.</p>
-            <p>El diagnóstico inicial — 90 minutos, sin compromiso — no tiene mínimo. Si después de esa conversación encajamos, conversamos los términos.</p>
+            <p>Empezamos por una conversación. El diagnóstico inicial — noventa minutos, sin compromiso — sirve para entender qué busca, qué tiene hoy y qué horizonte tiene en mente. No hay condiciones previas para sentarnos a hablar.</p>
+            <p>Si después de esa conversación encajamos, le propongo el mandato que tenga más sentido para su situación, y conversamos los términos sin sorpresas. Cada mandato es independiente, revisable cada doce meses, y cancelable con treinta días de aviso.</p>
           </div></div>
         </details>
         <details class="faq-item">
@@ -1958,12 +1958,10 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 · Manfred Roldán · Todos los derechos reservados</span>
-      <span>SUGEVAL · Costa Rica</span>
+      <span>Barrio Escalante · San José</span>
     </div>
   </div>
 </footer>
-
-<script src="image-slot.js"></script>
 
 <!-- Page behavior: sticky nav, scroll-active, FAQ accordion, form validation, reveal -->
 <script>
