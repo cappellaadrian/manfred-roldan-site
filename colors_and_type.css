@@ -1,0 +1,343 @@
+/* ============================================================
+   Manfred Roldán — Design Tokens · v4 "Auténtico"
+   Built from real brand reference:
+     · Navy #0E0D2C (deep blue-purple)
+     · White #FFFFFF
+     · Electric cobalt #495CFF
+   Type: Montserrat (display + body, ALL CAPS for headlines)
+       + Bodoni Moda (logo only)
+       + JetBrains Mono (numerals)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* ---------- COLOR — Foundation (dark default) ---------- */
+  --navy:         #0E0D2C;   /* signature deep blue-purple — DEFAULT SURFACE */
+  --navy-2:       #1A1944;   /* slightly lighter — elevated panels */
+  --navy-3:       #252360;   /* deepest inset / hover state */
+
+  --paper:        var(--navy);
+  --paper-2:      var(--navy-2);
+  --paper-3:      var(--navy-3);
+
+  --white:        #FFFFFF;   /* text + highlight box surface */
+  --ink:          var(--white);
+  --ink-2:        #C4C3D6;   /* muted white — secondary text */
+  --ink-3:        #8483A0;   /* faded — captions */
+  --ink-4:        #5A5972;   /* placeholder / disabled */
+
+  /* Light surface alternative — for editorial sections, printed materials */
+  --cream:        #F4ECDE;
+  --cream-2:      #EAE0CC;
+  --cream-3:      #D9CCB0;
+
+  /* ---------- COLOR — Brand Accent ---------- */
+  /* Kept --brass / --teal aliases for backwards-compat */
+  --cobalt:       #495CFF;   /* electric cobalt-violet — THE accent */
+  --cobalt-2:     #2A3FE5;   /* hover/press */
+  --cobalt-3:     #7585FF;   /* light variant */
+
+  --brass:        var(--cobalt);
+  --brass-2:      var(--cobalt-2);
+  --brass-3:      var(--cobalt-3);
+
+  --teal:         var(--white);
+  --teal-2:       var(--cream);
+  --teal-3:       #EAE5D0;
+
+  /* ---------- COLOR — Semantic ---------- */
+  --positive:     #2EB571;   /* clean green — pops on dark navy */
+  --warning:      #F4B81C;   /* amber */
+  --critical:     #FF4D6B;   /* coral red */
+  --info:         var(--cobalt);
+
+  /* ---------- COLOR — Surface helpers ---------- */
+  --surface:           var(--paper);
+  --surface-inset:     var(--paper-2);
+  --surface-inverse:   var(--cream);
+  --on-surface:        var(--ink);
+  --on-inverse:        var(--navy);
+
+  --border-hairline:   rgba(255, 255, 255, 0.16);
+  --border-soft:       rgba(255, 255, 255, 0.28);
+  --border-strong:     var(--white);
+
+  --overlay-scrim:     rgba(14, 13, 44, 0.72);
+
+  /* ---------- TYPOGRAPHY — Families ---------- */
+  --font-display: "Montserrat", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  --font-sans:    "Montserrat", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  --font-mark:    "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono:    "JetBrains Mono", "SF Mono", ui-monospace, monospace;
+
+  /* ---------- TYPOGRAPHY — Size scale ---------- */
+  --fs-hero:       clamp(48px, 7vw, 104px);
+  --fs-display-xl: clamp(56px, 7.5vw, 96px);
+  --fs-display-lg: clamp(44px, 5.5vw, 72px);
+  --fs-display-md: clamp(36px, 4vw, 56px);
+  --fs-h1:         clamp(32px, 3.2vw, 44px);
+  --fs-h2:         clamp(26px, 2.4vw, 34px);
+  --fs-h3:         22px;
+  --fs-h4:         18px;
+  --fs-body-lg:    19px;
+  --fs-body:       17px;
+  --fs-body-sm:    15px;
+  --fs-caption:    13px;
+  --fs-eyebrow:    12px;
+
+  /* ---------- TYPOGRAPHY — Line height ---------- */
+  --lh-hero:       0.94;
+  --lh-display:    1.05;
+  --lh-heading:    1.15;
+  --lh-body:       1.55;
+  --lh-tight:      1.25;
+
+  /* ---------- TYPOGRAPHY — Tracking ---------- */
+  --ls-hero:       -0.02em;
+  --ls-display:    -0.015em;
+  --ls-heading:    -0.005em;
+  --ls-body:       0em;
+  --ls-eyebrow:    0.18em;     /* heavy tracking — brand pattern for small caps */
+  --ls-button:     0.08em;
+
+  /* ---------- SPACING — 4/8 baseline ---------- */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  24px;
+  --space-6:  32px;
+  --space-7:  48px;
+  --space-8:  72px;
+  --space-9:  112px;
+  --space-10: 160px;
+
+  /* ---------- RADII ---------- */
+  --radius-0: 0;
+  --radius-1: 2px;
+  --radius-2: 4px;
+  --radius-pill: 9999px;
+
+  /* ---------- SHADOWS ---------- */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.25);
+  --shadow-md: 0 6px 20px rgba(0,0,0,0.35);
+  --shadow-lg: 0 18px 48px rgba(0,0,0,0.45);
+
+  /* ---------- MOTION ---------- */
+  --ease-out-quint:  cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out:     cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast:   180ms;
+  --dur-base:   320ms;
+  --dur-slow:   520ms;
+
+  /* ---------- LAYOUT ---------- */
+  --container-max: 1280px;
+  --gutter-desk:   80px;
+  --gutter-mob:    24px;
+  --nav-h-desk:    80px;
+  --nav-h-mob:     64px;
+}
+
+/* ============================================================
+   SEMANTIC TYPE STYLES
+   ============================================================ */
+
+/* Headline — ALL CAPS BOLD UPPERCASE is the signature pattern */
+.hero-headline,
+h1.hero {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-hero);
+  line-height: var(--lh-hero);
+  letter-spacing: var(--ls-hero);
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0;
+}
+.hero-headline em,
+h1.hero em {
+  font-style: normal;
+  color: var(--cobalt);
+  font-weight: 800;
+}
+
+.display-xl {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-display-xl);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.display-lg {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-display-lg);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+  text-transform: uppercase;
+}
+
+.display-md {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-display-md);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+  text-transform: uppercase;
+}
+
+h1, .h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-h1);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0;
+}
+
+h2, .h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0;
+}
+
+h3, .h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-h3);
+  line-height: var(--lh-tight);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  margin: 0;
+}
+
+h4, .h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-h4);
+  line-height: var(--lh-tight);
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* Eyebrow — small tracked uppercase, often used inside a white pill box */
+.eyebrow {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+/* Eyebrow inside a white highlight box — the signature brand pattern */
+.eyebrow-box {
+  display: inline-block;
+  background: var(--white);
+  color: var(--navy);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border-radius: var(--radius-0);
+  line-height: 1;
+}
+
+p, .body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--ink-2);
+  max-width: 64ch;
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.body-lg {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-body);
+  color: var(--ink-2);
+  max-width: 60ch;
+}
+
+.body-sm,
+small {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--fs-body-sm);
+  line-height: 1.55;
+  color: var(--ink-3);
+}
+
+.caption {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: var(--fs-caption);
+  line-height: 1.45;
+  color: var(--ink-3);
+  letter-spacing: 0.02em;
+}
+
+.numeric {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum";
+  color: var(--ink);
+}
+
+/* Signature brand rule — hairline white horizontal */
+.brand-rule {
+  width: 100%;
+  height: 1px;
+  background: var(--white);
+  border: 0;
+  margin: 0;
+}
+
+/* Light/inverse surface utility */
+.surface-light {
+  background: var(--cream);
+  --ink:    var(--navy);
+  --ink-2:  #2A2856;
+  --ink-3:  #5A5876;
+  --ink-4:  #8A8AA8;
+  --border-hairline: rgba(14, 13, 44, 0.18);
+  color: var(--ink);
+}
+.surface-light .eyebrow-box {
+  background: var(--navy);
+  color: var(--cream);
+}
+.surface-light .brand-rule {
+  background: var(--navy);
+}
+
+a {
+  color: var(--ink);
+  text-decoration: none;
+  background-image: linear-gradient(var(--cobalt), var(--cobalt));
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size var(--dur-base) var(--ease-out-quint);
+  padding-bottom: 4px;
+}
+a:hover { background-size: 100% 2px; }
+a.cobalt { color: var(--cobalt); }

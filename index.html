@@ -1,0 +1,2111 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Servicios · Manfred Roldán</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="colors_and_type.css">
+
+<style>
+  /* ============ RESET ============ */
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--navy); color: var(--white); }
+  body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  img { display: block; max-width: 100%; }
+  button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+
+  :root {
+    --section-y: 140px;
+    --section-y-mob: 80px;
+    --rule: rgba(255,255,255,0.15);
+    --rule-strong: rgba(255,255,255,0.35);
+  }
+
+  /* ============ LAYOUT ============ */
+  .container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--gutter-desk); }
+  @media (max-width: 768px) { .container { padding: 0 var(--gutter-mob); } }
+
+  section { padding: var(--section-y) 0; position: relative; }
+  @media (max-width: 768px) { section { padding: var(--section-y-mob) 0; } }
+
+  /* ============ EYEBROW ============ */
+  .eyebrow-box {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--white);
+    color: var(--navy);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 9px 14px 8px;
+    line-height: 1;
+  }
+  .eyebrow-box::before {
+    content: ""; width: 6px; height: 6px; background: var(--cobalt); border-radius: 50%;
+  }
+  .surface-cream .eyebrow-box { background: var(--navy); color: var(--cream); }
+  .surface-cream .eyebrow-box::before { background: var(--cobalt); }
+
+  .eyebrow-text {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--cobalt);
+  }
+
+  /* ============ NAV ============ */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    height: var(--nav-h-desk);
+    background: rgba(14, 13, 44, 0.78);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--dur-base) var(--ease-out-quint), background var(--dur-base) var(--ease-out-quint);
+  }
+  .nav.scrolled {
+    border-bottom-color: var(--rule);
+    background: rgba(14, 13, 44, 0.92);
+  }
+  .nav-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; }
+  .nav-mark { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--white); }
+  .nav-mark .mono {
+    width: 44px; height: 44px;
+    display: grid; place-items: center;
+    flex-shrink: 0;
+  }
+  .nav-mark .mono img { display: block; width: 100%; height: 100%; object-fit: contain; }
+  .nav-mark .name {
+    font-family: var(--font-display); font-weight: 800; font-size: 12px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+  }
+  .nav-mark .name small {
+    display: block; font-weight: 600; font-size: 9px;
+    letter-spacing: 0.24em; color: var(--cobalt); margin-top: 3px;
+  }
+  .nav-links { display: flex; gap: 30px; align-items: center; list-style: none; padding: 0; margin: 0; }
+  .nav-links a {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--white);
+    position: relative;
+    padding-bottom: 5px;
+    text-decoration: none;
+    opacity: 0.78;
+    transition: opacity var(--dur-fast) var(--ease-out-quint);
+  }
+  .nav-links a::after {
+    content: ""; position: absolute; left: 0; right: auto; bottom: 0;
+    height: 2px; width: 0; background: var(--cobalt);
+    transition: width var(--dur-base) var(--ease-out-quint);
+  }
+  .nav-links a:hover { opacity: 1; }
+  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+  .nav-links a.active { opacity: 1; }
+  .nav-cta {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: var(--cobalt);
+    color: var(--white);
+    padding: 12px 18px;
+    transition: background var(--dur-base) var(--ease-out-quint);
+    text-decoration: none;
+  }
+  .nav-cta:hover { background: var(--cobalt-2); }
+  @media (max-width: 900px) {
+    .nav { height: var(--nav-h-mob); }
+    .nav-links { display: none; }
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    padding-top: 100px;
+    padding-bottom: 0;
+    position: relative;
+  }
+  .hero-eyebrows {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+  .hero-eyebrows .crumb {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .hero-eyebrows .crumb.current { color: var(--white); }
+  .hero-eyebrows .sep { color: var(--ink-4); }
+
+  .hero-headline {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(72px, 14vw, 220px);
+    line-height: 0.86;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+    margin: 0 0 32px;
+    color: var(--white);
+  }
+  .hero-headline .word { display: block; overflow: hidden; }
+  .hero-headline .word > span {
+    display: inline-block;
+    transform: translateY(110%);
+    opacity: 0;
+    animation: rise 900ms var(--ease-out-quint) forwards;
+  }
+  .hero-headline .word:nth-child(2) > span { animation-delay: 120ms; }
+  .hero-headline .word:nth-child(3) > span { animation-delay: 240ms; }
+  .hero-headline .blue { color: var(--cobalt); }
+
+  @keyframes rise {
+    from { transform: translateY(110%); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: 5fr 4fr 3fr;
+    gap: 64px;
+    align-items: end;
+    padding: 56px 0 64px;
+    border-top: 1px solid var(--white);
+    margin-top: 40px;
+    opacity: 0;
+    animation: fade-in 700ms var(--ease-out-quint) 420ms forwards;
+  }
+  .hero-meta .lead {
+    font-family: var(--font-sans);
+    font-size: 19px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    margin: 0;
+    max-width: 38ch;
+  }
+  .hero-meta .lead strong { color: var(--white); font-weight: 600; }
+  .hero-meta .figure {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .hero-meta .figure .num {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 56px;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--white);
+  }
+  .hero-meta .figure .num .dot { color: var(--cobalt); }
+  .hero-meta .figure .label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .hero-meta .ctas { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+
+  @media (max-width: 900px) {
+    .hero-meta { grid-template-columns: 1fr; gap: 32px; }
+  }
+
+  /* ============ BUTTONS ============ */
+  .btn {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all var(--dur-base) var(--ease-out-quint);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    line-height: 1;
+  }
+  .btn-primary { background: var(--cobalt); color: var(--white); }
+  .btn-primary:hover { background: var(--cobalt-2); }
+  .btn-outline { background: transparent; color: var(--white); border: 1px solid var(--white); }
+  .btn-outline:hover { background: var(--white); color: var(--navy); }
+  .btn-ghost { padding: 14px 0; color: var(--white); }
+  .btn-ghost .arrow { color: var(--cobalt); transition: transform var(--dur-base) var(--ease-out-quint); }
+  .btn-ghost:hover .arrow { transform: translateX(6px); }
+  .surface-cream .btn-outline { color: var(--navy); border-color: var(--navy); }
+  .surface-cream .btn-outline:hover { background: var(--navy); color: var(--cream); }
+
+  /* ============ HERO MARQUEE STRIP ============ */
+  .marquee-strip {
+    border-top: 1px solid var(--white);
+    border-bottom: 1px solid var(--white);
+    overflow: hidden;
+    padding: 18px 0;
+    opacity: 0;
+    animation: fade-in 700ms var(--ease-out-quint) 600ms forwards;
+  }
+  .marquee-track {
+    display: flex;
+    gap: 56px;
+    width: max-content;
+    animation: scroll-x 50s linear infinite;
+  }
+  .marquee-track > span {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--white);
+    display: inline-flex; align-items: center; gap: 56px;
+    white-space: nowrap;
+  }
+  .marquee-track > span::after {
+    content: "✦"; color: var(--cobalt); font-size: 12px;
+  }
+  @keyframes scroll-x {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ============ APHORISM BREAK ============ */
+  .aphorism {
+    padding: 120px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .aphorism-grid {
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .aphorism-grid .side {
+    display: flex; flex-direction: column; gap: 14px;
+    padding-top: 14px;
+  }
+  .aphorism-text {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(40px, 6vw, 88px);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin: 0;
+    max-width: 16ch;
+  }
+  .aphorism-text .blue { color: var(--cobalt); }
+  .aphorism-text .quiet { color: var(--ink-3); }
+  .aphorism-rule { width: 240px; height: 1px; background: var(--white); margin: 36px 0 16px; }
+  .aphorism-caption {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  @media (max-width: 900px) {
+    .aphorism-grid { grid-template-columns: 1fr; gap: 24px; }
+    .aphorism { padding: 80px 0; }
+  }
+
+  /* ============ SECTION HEAD ============ */
+  .section-head {
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+    gap: 64px;
+    align-items: end;
+    margin-bottom: 80px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--white);
+  }
+  .section-head .side {
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .section-head .index {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: var(--ink-3);
+  }
+  .section-head .index .accent { color: var(--cobalt); }
+  .section-head .body {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 42ch;
+    margin: 0;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 116px);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin: 0;
+  }
+  .section-title .blue { color: var(--cobalt); }
+  .surface-cream .section-head { border-bottom-color: var(--navy); }
+  .surface-cream .section-title { color: var(--navy); }
+  .surface-cream .section-head .body { color: rgba(14,13,44,0.7); }
+  @media (max-width: 900px) {
+    .section-head { grid-template-columns: 1fr; gap: 24px; margin-bottom: 56px; }
+  }
+
+  /* ============ ENFOQUE — process ============ */
+  .approach-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--white);
+  }
+  .approach-step {
+    padding: 36px 28px 36px 0;
+    border-right: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+  }
+  .approach-step:last-child { border-right: 0; padding-right: 0; }
+  .approach-step:not(:first-child) { padding-left: 28px; }
+  .approach-step .num {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    color: var(--cobalt);
+  }
+  .approach-step .title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: -0.015em;
+    color: var(--white);
+  }
+  .approach-step .copy {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+  .approach-step .duration {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    margin-top: auto;
+    padding-top: 14px;
+  }
+  @media (max-width: 900px) {
+    .approach-grid { grid-template-columns: repeat(2, 1fr); }
+    .approach-step:nth-child(2) { border-right: 0; padding-right: 0; }
+    .approach-step:nth-child(3) { padding-left: 0; border-top: 1px solid var(--rule); padding-top: 28px; margin-top: 0; }
+    .approach-step:nth-child(4) { border-right: 0; border-top: 1px solid var(--rule); padding-top: 28px; }
+  }
+  @media (max-width: 600px) {
+    .approach-grid { grid-template-columns: 1fr; }
+    .approach-step { border-right: 0; border-bottom: 1px solid var(--rule); padding: 28px 0; }
+    .approach-step:not(:first-child) { padding-left: 0; }
+    .approach-step:last-child { border-bottom: 0; }
+  }
+
+  /* ============ SERVICIOS — editorial spreads ============ */
+  .servicios-list { display: flex; flex-direction: column; }
+  .servicio {
+    display: grid;
+    grid-template-columns: 1.2fr 4fr 6fr 2fr;
+    gap: 48px;
+    align-items: start;
+    padding: 56px 0;
+    border-top: 1px solid var(--rule);
+    position: relative;
+    transition: background var(--dur-base) var(--ease-out-quint);
+  }
+  .servicio:last-child { border-bottom: 1px solid var(--rule); }
+  .servicio:hover .servicio-num { color: var(--cobalt); }
+  .servicio:hover .servicio-cta .arrow { transform: translateX(6px); color: var(--cobalt); }
+  .servicio-num {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(48px, 5vw, 80px);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    color: var(--ink-3);
+    transition: color var(--dur-base) var(--ease-out-quint);
+  }
+  .servicio-head { display: flex; flex-direction: column; gap: 14px; }
+  .servicio-tag {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--cobalt);
+  }
+  .servicio-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(28px, 3vw, 44px);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin: 0;
+  }
+  .servicio-body { display: flex; flex-direction: column; gap: 22px; }
+  .servicio-body p {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    margin: 0;
+    max-width: 48ch;
+  }
+  .servicio-incluye {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px;
+    list-style: none; padding: 0; margin: 0;
+  }
+  .servicio-incluye li {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--white);
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.4;
+  }
+  .servicio-incluye li::before {
+    content: ""; position: absolute; left: 0; top: 8px;
+    width: 8px; height: 1px; background: var(--cobalt);
+  }
+  .servicio-meta {
+    display: flex; flex-direction: column; gap: 16px;
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .servicio-meta .row { display: flex; flex-direction: column; gap: 4px; }
+  .servicio-meta .row .k { color: var(--ink-3); }
+  .servicio-meta .row .v { color: var(--white); }
+  .servicio-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--font-display); font-size: 11px;
+    font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--white); text-decoration: none;
+    margin-top: 8px;
+  }
+  .servicio-cta .arrow { color: var(--white); transition: transform var(--dur-base) var(--ease-out-quint), color var(--dur-base) var(--ease-out-quint); }
+
+  @media (max-width: 1100px) {
+    .servicio { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .servicio-num { grid-column: 1 / -1; }
+    .servicio-meta { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; gap: 24px; }
+  }
+  @media (max-width: 700px) {
+    .servicio { grid-template-columns: 1fr; gap: 22px; padding: 44px 0; }
+    .servicio-incluye { grid-template-columns: 1fr; }
+  }
+
+  /* ============ TYPE WALL ============ */
+  .type-wall {
+    padding: 160px 0 140px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    text-align: left;
+  }
+  .type-wall .frame {
+    display: grid; grid-template-columns: auto 1fr auto;
+    gap: 40px; align-items: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 48px;
+  }
+  .type-wall .frame .rule { height: 1px; background: var(--rule); }
+  .type-wall .wall-text {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(56px, 9vw, 160px);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin: 0;
+  }
+  .type-wall .wall-text em { font-style: normal; color: var(--cobalt); }
+  .type-wall .wall-text .quiet { color: var(--ink-3); }
+
+  /* ============ STATS ============ */
+  .stats {
+    padding: 140px 0;
+  }
+  .stats-head { margin-bottom: 64px; }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--white);
+  }
+  .stat {
+    padding: 36px 24px 24px 0;
+    border-right: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 240px;
+  }
+  .stat:not(:first-child) { padding-left: 24px; }
+  .stat:last-child { border-right: 0; padding-right: 0; }
+  .stat .figure {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(60px, 7vw, 104px);
+    line-height: 0.9;
+    letter-spacing: -0.035em;
+    color: var(--white);
+  }
+  .stat .figure .accent { color: var(--cobalt); }
+  .stat .figure .unit {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink-3);
+    letter-spacing: 0;
+    margin-left: 4px;
+  }
+  .stat .label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .stat .note {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--ink-2);
+    line-height: 1.5;
+    margin-top: auto;
+  }
+  @media (max-width: 900px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: 0; }
+    .stat:nth-child(3), .stat:nth-child(4) { border-top: 1px solid var(--rule); padding-top: 28px; }
+    .stat { min-height: 0; }
+  }
+  @media (max-width: 560px) {
+    .stats-grid { grid-template-columns: 1fr; }
+    .stat { border-right: 0; border-bottom: 1px solid var(--rule); padding: 28px 0 24px; }
+    .stat:last-child { border-bottom: 0; }
+    .stat:not(:first-child) { padding-left: 0; border-top: 0; }
+  }
+
+  /* ============ TESTIMONIOS — horizontal scroll ============ */
+  .testimonios-section { padding: 140px 0; border-top: 1px solid var(--rule); }
+  .testimonios-rail {
+    display: flex; gap: 24px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 8px 0 24px;
+    margin: 0 calc(-1 * var(--gutter-desk));
+    padding-left: var(--gutter-desk);
+    padding-right: var(--gutter-desk);
+    scrollbar-width: thin;
+    scrollbar-color: var(--cobalt) transparent;
+  }
+  .testimonios-rail::-webkit-scrollbar { height: 6px; }
+  .testimonios-rail::-webkit-scrollbar-thumb { background: var(--cobalt); }
+  .testimonio {
+    flex: 0 0 460px;
+    scroll-snap-align: start;
+    border: 1px solid var(--rule);
+    padding: 36px 32px;
+    display: flex; flex-direction: column; gap: 24px;
+    background: var(--navy-2);
+    min-height: 360px;
+    transition: border-color var(--dur-base) var(--ease-out-quint);
+  }
+  .testimonio:hover { border-color: var(--cobalt); }
+  .testimonio .quote {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.18;
+    letter-spacing: -0.005em;
+    text-transform: none;
+    color: var(--white);
+    margin: 0;
+  }
+  .testimonio .quote::before {
+    content: "“"; color: var(--cobalt); font-size: 48px; line-height: 0;
+    font-family: "Bodoni Moda", serif; vertical-align: -10px; margin-right: 4px;
+  }
+  .testimonio .who {
+    display: flex; align-items: center; gap: 14px;
+    margin-top: auto;
+  }
+  .testimonio .who .avatar {
+    width: 44px; height: 44px;
+    background: var(--navy-3);
+    border: 1px solid var(--rule);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--white);
+    display: grid; place-items: center;
+    letter-spacing: 0.05em;
+  }
+  .testimonio .who .meta { display: flex; flex-direction: column; gap: 3px; }
+  .testimonio .who .name {
+    font-family: var(--font-display); font-size: 13px;
+    font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--white);
+  }
+  .testimonio .who .role {
+    font-family: var(--font-sans); font-size: 12px;
+    color: var(--ink-3);
+  }
+  @media (max-width: 600px) {
+    .testimonio { flex: 0 0 80vw; padding: 28px 24px; min-height: 0; }
+  }
+
+  /* ============ SOBRE — cream surface ============ */
+  .surface-cream {
+    background: var(--cream);
+    color: var(--navy);
+    --ink: var(--navy);
+    --ink-2: #2A2856;
+    --ink-3: #5A5876;
+  }
+  .surface-cream .section-title { color: var(--navy); }
+  .surface-cream .section-head .index { color: rgba(14,13,44,0.55); }
+  .surface-cream .section-head .index .accent { color: var(--cobalt); }
+  .surface-cream .section-head .body { color: rgba(14,13,44,0.72); }
+  .sobre-grid {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .sobre-portrait { aspect-ratio: 4/5; position: relative; overflow: hidden; background: rgba(14,13,44,0.05); }
+  .sobre-portrait image-slot { width: 100%; height: 100%; display: block; --slot-bg: rgba(14,13,44,0.06); --slot-border: rgba(14,13,44,0.2); --slot-text: rgba(14,13,44,0.6); }
+  .sobre-portrait .tag {
+    position: absolute; bottom: 16px; left: 16px;
+    font-family: var(--font-display); font-size: 10px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    background: var(--navy); color: var(--cream); padding: 7px 12px; font-weight: 700;
+    z-index: 2;
+  }
+  .sobre-body { display: flex; flex-direction: column; gap: 28px; }
+  .sobre-body p {
+    font-family: var(--font-sans);
+    font-size: 19px;
+    line-height: 1.55;
+    color: rgba(14,13,44,0.78);
+    margin: 0;
+    max-width: 56ch;
+  }
+  .sobre-body p strong { color: var(--navy); font-weight: 600; }
+  .credentials {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 40px;
+    border-top: 1px solid var(--navy);
+    padding-top: 28px;
+    margin-top: 8px;
+  }
+  .credential .label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(14,13,44,0.55);
+    margin-bottom: 6px;
+  }
+  .credential .value {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    color: var(--navy);
+    line-height: 1.3;
+  }
+  @media (max-width: 900px) {
+    .sobre-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  /* ============ BLOG / NOTAS ============ */
+  .notas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--white);
+  }
+  .nota {
+    border-right: 1px solid var(--rule);
+    padding: 32px 28px 28px 0;
+    display: flex; flex-direction: column; gap: 18px;
+    min-height: 340px;
+    text-decoration: none;
+    color: inherit;
+    transition: background var(--dur-base) var(--ease-out-quint);
+  }
+  .nota:not(:first-child) { padding-left: 28px; }
+  .nota:last-child { border-right: 0; padding-right: 0; }
+  .nota:hover .nota-title { color: var(--cobalt); }
+  .nota-meta {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    letter-spacing: 0.04em;
+  }
+  .nota-meta .cat { color: var(--cobalt); text-transform: uppercase; letter-spacing: 0.18em; font-family: var(--font-display); font-weight: 700; }
+  .nota-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin: 0;
+    transition: color var(--dur-base) var(--ease-out-quint);
+  }
+  .nota-snippet {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    margin: 0;
+  }
+  .nota-more {
+    margin-top: auto;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--white);
+    display: inline-flex; gap: 8px; align-items: center;
+  }
+  .nota-more .arrow { color: var(--cobalt); }
+  @media (max-width: 900px) {
+    .notas-grid { grid-template-columns: 1fr; }
+    .nota { border-right: 0; border-bottom: 1px solid var(--rule); padding: 32px 0; min-height: 0; }
+    .nota:not(:first-child) { padding-left: 0; }
+    .nota:last-child { border-bottom: 0; }
+  }
+
+  /* ============ FAQ ============ */
+  .faq-list { border-top: 1px solid var(--white); }
+  .faq-item { border-bottom: 1px solid var(--rule); }
+  .faq-q {
+    width: 100%; text-align: left;
+    padding: 28px 0;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 24px;
+    align-items: center;
+    cursor: pointer;
+  }
+  .faq-q .index {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--cobalt);
+    letter-spacing: 0.05em;
+    min-width: 32px;
+  }
+  .faq-q .label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(18px, 1.8vw, 24px);
+    letter-spacing: -0.005em;
+    line-height: 1.2;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+  .faq-q .toggle {
+    width: 36px; height: 36px;
+    border: 1px solid var(--white);
+    display: grid; place-items: center;
+    position: relative;
+    transition: background var(--dur-base) var(--ease-out-quint), border-color var(--dur-base) var(--ease-out-quint);
+  }
+  .faq-q .toggle::before,
+  .faq-q .toggle::after {
+    content: ""; position: absolute;
+    background: var(--white);
+    transition: transform var(--dur-base) var(--ease-out-quint), background var(--dur-base) var(--ease-out-quint);
+  }
+  .faq-q .toggle::before { width: 12px; height: 1.5px; }
+  .faq-q .toggle::after  { width: 1.5px; height: 12px; }
+  .faq-item.open .faq-q .toggle { background: var(--cobalt); border-color: var(--cobalt); }
+  .faq-item.open .faq-q .toggle::after { transform: rotate(90deg); }
+  .faq-a {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height var(--dur-slow) var(--ease-out-quint);
+  }
+  .faq-a-inner {
+    padding: 0 60px 32px 60px;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    max-width: 72ch;
+  }
+  .faq-a-inner p { margin: 0 0 12px; }
+  .faq-a-inner p:last-child { margin-bottom: 0; }
+  @media (max-width: 700px) {
+    .faq-a-inner { padding: 0 0 28px 0; }
+  }
+
+  /* ============ CONTACTO / NEWSLETTER ============ */
+  .contacto-section {
+    border-top: 1px solid var(--white);
+    padding: 140px 0;
+  }
+  .contacto-grid {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .contacto-aside {
+    display: flex; flex-direction: column; gap: 36px;
+  }
+  .contacto-aside .lead {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(36px, 4vw, 60px);
+    line-height: 0.96;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin: 0;
+  }
+  .contacto-aside .lead .blue { color: var(--cobalt); }
+  .channel-list { display: flex; flex-direction: column; gap: 0; }
+  .channel {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    padding: 20px 0;
+    border-top: 1px solid var(--rule);
+    align-items: center;
+  }
+  .channel:last-child { border-bottom: 1px solid var(--rule); }
+  .channel .k {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .channel .v {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+  .channel a { color: inherit; text-decoration: none; }
+  .channel a:hover { color: var(--cobalt); }
+
+  /* Form */
+  .form-card { display: flex; flex-direction: column; gap: 28px; }
+  .form-tabs {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border: 1px solid var(--white);
+  }
+  .form-tab {
+    padding: 16px 18px;
+    text-align: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: transparent;
+    cursor: pointer;
+    transition: background var(--dur-base) var(--ease-out-quint), color var(--dur-base) var(--ease-out-quint);
+    border: 0;
+  }
+  .form-tab.active { background: var(--white); color: var(--navy); }
+  .form-tab + .form-tab { border-left: 1px solid var(--white); }
+  .form-tab.active + .form-tab,
+  .form-tab + .form-tab.active { border-left-color: var(--white); }
+
+  .field { display: flex; flex-direction: column; gap: 8px; position: relative; }
+  .field label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .field input, .field textarea, .field select {
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--rule);
+    padding: 12px 0;
+    font-family: var(--font-sans);
+    font-size: 17px;
+    color: var(--white);
+    outline: none;
+    transition: border-color var(--dur-base) var(--ease-out-quint);
+    width: 100%;
+    resize: vertical;
+  }
+  .field textarea { min-height: 88px; }
+  .field select option { background: var(--navy); color: var(--white); }
+  .field input::placeholder, .field textarea::placeholder { color: var(--ink-4); }
+  .field input:focus, .field textarea:focus, .field select:focus { border-bottom-color: var(--cobalt); }
+  .field.error input, .field.error textarea, .field.error select { border-bottom-color: var(--critical); }
+  .field .err {
+    font-family: var(--font-display);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--critical);
+    display: none;
+  }
+  .field.error .err { display: block; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  @media (max-width: 600px) { .field-row { grid-template-columns: 1fr; } }
+  .form-submit { display: flex; gap: 16px; align-items: center; padding-top: 16px; flex-wrap: wrap; }
+  .form-status {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--positive);
+  }
+  .form-status.bad { color: var(--critical); }
+
+  @media (max-width: 900px) {
+    .contacto-grid { grid-template-columns: 1fr; gap: 48px; }
+  }
+
+  /* ============ FOOTER ============ */
+  .footer {
+    background: #07061B;
+    color: var(--ink-2);
+    padding: 80px 0 32px;
+    border-top: 1px solid var(--rule);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 2fr;
+    gap: 56px;
+    margin-bottom: 80px;
+  }
+  .newsletter-footer { display: flex; flex-direction: column; gap: 12px; max-width: 36ch; }
+  .newsletter-footer p {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--ink-3);
+    line-height: 1.55;
+    margin: 0 0 4px;
+  }
+  .newsletter-footer form {
+    display: flex; gap: 0;
+    border: 1px solid var(--rule);
+  }
+  .newsletter-footer input {
+    flex: 1; min-width: 0;
+    background: transparent; border: 0;
+    padding: 12px 14px;
+    font-family: var(--font-sans); font-size: 13px;
+    color: var(--white); outline: none;
+    transition: border-color 200ms ease;
+  }
+  .newsletter-footer input::placeholder { color: var(--ink-4); }
+  .newsletter-footer button {
+    background: var(--cobalt); color: var(--white);
+    padding: 12px 18px;
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: background var(--dur-base) var(--ease-out-quint);
+    white-space: nowrap;
+  }
+  .newsletter-footer button:hover { background: var(--cobalt-2); }
+  .newsletter-footer button:disabled { background: var(--positive); cursor: default; }
+  .footer h5 {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 10px; letter-spacing: 0.24em;
+    text-transform: uppercase; color: var(--ink-3);
+    margin: 0 0 18px;
+  }
+  .footer ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .footer a {
+    color: var(--white); text-decoration: none;
+    font-family: var(--font-display); font-weight: 600;
+    font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .footer a:hover { color: var(--cobalt); }
+  .footer .mark {
+    display: flex; flex-direction: column; gap: 18px; max-width: 32ch;
+  }
+  .footer .mark .mono {
+    width: 64px; height: 64px;
+    display: grid; place-items: center;
+  }
+  .footer .mark .mono img { display: block; width: 100%; height: 100%; object-fit: contain; }
+  .footer .mark .desc {
+    font-family: var(--font-sans); font-size: 14px;
+    color: var(--ink-3); line-height: 1.6;
+  }
+  .footer-bottom {
+    border-top: 1px solid var(--rule);
+    padding-top: 32px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--font-display); font-size: 10px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-3);
+    flex-wrap: wrap; gap: 16px;
+  }
+  @media (max-width: 1100px) {
+    .footer-grid { grid-template-columns: 2fr 1fr 1fr; gap: 40px; }
+    .newsletter-footer { grid-column: 1 / -1; max-width: 480px; }
+  }
+  @media (max-width: 700px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .newsletter-footer { grid-column: 1 / -1; }
+  }
+  @media (max-width: 460px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .newsletter-footer form { flex-direction: column; }
+  }
+
+  /* ============ FADE-UP ON SCROLL ============ */
+  [data-reveal] { opacity: 0; transform: translateY(14px); transition: opacity 700ms var(--ease-out-quint), transform 700ms var(--ease-out-quint); }
+  [data-reveal].in { opacity: 1; transform: translateY(0); }
+
+  /* ============ ANIMATED CTA CARD ============ */
+  /* Uses CSS @property for GPU-friendly custom-property interpolation.
+     Cobalt-blue blobs drift across wide paths and pulse in radius. */
+  @property --b1x { syntax: '<percentage>'; inherits: false; initial-value: 10%; }
+  @property --b1y { syntax: '<percentage>'; inherits: false; initial-value: 10%; }
+  @property --b2x { syntax: '<percentage>'; inherits: false; initial-value: 90%; }
+  @property --b2y { syntax: '<percentage>'; inherits: false; initial-value: 10%; }
+  @property --b3x { syntax: '<percentage>'; inherits: false; initial-value: 10%; }
+  @property --b3y { syntax: '<percentage>'; inherits: false; initial-value: 90%; }
+  @property --b4x { syntax: '<percentage>'; inherits: false; initial-value: 90%; }
+  @property --b4y { syntax: '<percentage>'; inherits: false; initial-value: 90%; }
+  @property --b5x { syntax: '<percentage>'; inherits: false; initial-value: 50%; }
+  @property --b5y { syntax: '<percentage>'; inherits: false; initial-value: 50%; }
+  @property --s1 { syntax: '<percentage>'; inherits: false; initial-value: 50%; }
+  @property --s2 { syntax: '<percentage>'; inherits: false; initial-value: 50%; }
+  @property --s3 { syntax: '<percentage>'; inherits: false; initial-value: 50%; }
+  @property --s4 { syntax: '<percentage>'; inherits: false; initial-value: 50%; }
+  @property --s5 { syntax: '<percentage>'; inherits: false; initial-value: 60%; }
+
+  .cta-animated { padding: var(--section-y) 0; border-top: 1px solid var(--rule); }
+  @media (max-width: 768px) { .cta-animated { padding: var(--section-y-mob) 0; } }
+
+  .cta-card {
+    position: relative;
+    overflow: hidden;
+    padding: 96px 64px;
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #1A1F5C;
+    background-image:
+      radial-gradient(circle at var(--b1x) var(--b1y), #2A3FE5 0px, transparent var(--s1)),
+      radial-gradient(circle at var(--b2x) var(--b2y), #495CFF 0px, transparent var(--s2)),
+      radial-gradient(circle at var(--b3x) var(--b3y), #7585FF 0px, transparent var(--s3)),
+      radial-gradient(circle at var(--b4x) var(--b4y), #1530B8 0px, transparent var(--s4)),
+      radial-gradient(circle at var(--b5x) var(--b5y), rgba(244,236,222,0.18) 0px, transparent var(--s5));
+    animation:
+      m-b1 5s ease-in-out infinite,
+      m-b2 6s ease-in-out infinite,
+      m-b3 5.5s ease-in-out infinite,
+      m-b4 6.5s ease-in-out infinite,
+      m-b5 4s ease-in-out infinite,
+      m-s1 3.5s ease-in-out infinite,
+      m-s2 4.2s ease-in-out infinite,
+      m-s3 3.8s ease-in-out infinite,
+      m-s4 4.6s ease-in-out infinite,
+      m-s5 3s ease-in-out infinite;
+  }
+  .cta-card::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(14,13,44,0.1), rgba(14,13,44,0.35));
+    pointer-events: none;
+  }
+  .cta-card > * { position: relative; z-index: 1; }
+
+  .cta-card .eyebrow-box { margin-bottom: 36px; }
+  .cta-headline {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(48px, 6vw, 88px);
+    line-height: 0.96;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    margin: 0 0 24px;
+    max-width: 14ch;
+    color: var(--white);
+  }
+  .cta-headline .accent { color: #F4ECDE; }
+  .cta-sub {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.88);
+    margin: 0 0 36px;
+    max-width: 46ch;
+    font-weight: 400;
+  }
+  .cta-btn {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: var(--white);
+    color: var(--navy);
+    padding: 16px 28px;
+    transition: transform var(--dur-base) var(--ease-out-quint), background var(--dur-base) var(--ease-out-quint);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    line-height: 1;
+    border: 0;
+    cursor: pointer;
+  }
+  .cta-btn:hover { transform: translateY(-2px); background: var(--cream); }
+  .cta-btn .arrow { color: var(--cobalt); }
+
+  @keyframes m-b1 { 0%,100% { --b1x: 5%;  --b1y: 5%;  } 25% { --b1x: 45%; --b1y: 20%; } 50% { --b1x: 30%; --b1y: 55%; } 75% { --b1x: 0%;  --b1y: 30%; } }
+  @keyframes m-b2 { 0%,100% { --b2x: 95%; --b2y: 5%;  } 33% { --b2x: 55%; --b2y: 35%; } 66% { --b2x: 80%; --b2y: 65%; } }
+  @keyframes m-b3 { 0%,100% { --b3x: 5%;  --b3y: 95%; } 40% { --b3x: 45%; --b3y: 65%; } 70% { --b3x: 25%; --b3y: 100%; } }
+  @keyframes m-b4 { 0%,100% { --b4x: 95%; --b4y: 95%; } 30% { --b4x: 60%; --b4y: 70%; } 60% { --b4x: 100%; --b4y: 50%; } }
+  @keyframes m-b5 { 0%,100% { --b5x: 50%; --b5y: 50%; } 25% { --b5x: 70%; --b5y: 30%; } 50% { --b5x: 40%; --b5y: 70%; } 75% { --b5x: 30%; --b5y: 40%; } }
+  @keyframes m-s1 { 0%,100% { --s1: 40%; } 50% { --s1: 75%; } }
+  @keyframes m-s2 { 0%,100% { --s2: 40%; } 50% { --s2: 80%; } }
+  @keyframes m-s3 { 0%,100% { --s3: 40%; } 50% { --s3: 72%; } }
+  @keyframes m-s4 { 0%,100% { --s4: 40%; } 50% { --s4: 78%; } }
+  @keyframes m-s5 { 0%,100% { --s5: 45%; } 50% { --s5: 80%; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cta-card { animation: none; }
+  }
+  @media (max-width: 700px) {
+    .cta-card { padding: 64px 32px; }
+  }
+</style>
+</head>
+<body data-tweak-accent="#495CFF" data-tweak-display="montserrat">
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#top" class="nav-mark" aria-label="Manfred Roldán — Inicio">
+      <span class="mono"><img src="assets/logo-monogram.png" alt="Manfred Roldán"></span>
+      <span class="name">Manfred Roldán<small>Asesor patrimonial</small></span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#enfoque">Enfoque</a></li>
+        <li><a href="#servicios" class="active">Servicios</a></li>
+        <li><a href="#cifras">Resultados</a></li>
+        <li><a href="#sobre">Sobre mí</a></li>
+        <li><a href="#notas">Notas</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+    <a href="#contacto" class="nav-cta">Agendar →</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" data-section="hero">
+    <div class="container">
+      <div class="hero-eyebrows">
+        <span class="crumb">Manfred Roldán</span>
+        <span class="sep">/</span>
+        <span class="crumb current">Servicios</span>
+      </div>
+
+      <h1 class="hero-headline">
+        <span class="word"><span>Carteras que</span></span>
+        <span class="word"><span class="blue">resisten</span></span>
+        <span class="word"><span>el ciclo.</span></span>
+      </h1>
+
+      <div class="hero-meta">
+        <p class="lead">
+          Cuatro formas de trabajar conmigo, una sola pregunta de fondo:
+          <strong>¿qué quiere que haga su patrimonio en los próximos diez años?</strong>
+          La conversación empieza siempre por usted — el portafolio se construye después.
+        </p>
+        <div class="figure">
+          <div class="num">04<span class="dot">.</span></div>
+          <div class="label">Servicios principales</div>
+        </div>
+        <div class="ctas">
+          <a href="#servicios" class="btn btn-primary">Ver servicios <span>→</span></a>
+          <a href="#contacto" class="btn btn-ghost">Hablar conmigo <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="marquee-strip" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Planificación patrimonial</span>
+        <span>Inversión inmobiliaria</span>
+        <span>Asesoría de portafolio</span>
+        <span>Sucesión &amp; legado</span>
+        <span>Educación financiera</span>
+        <span>Planificación patrimonial</span>
+        <span>Inversión inmobiliaria</span>
+        <span>Asesoría de portafolio</span>
+        <span>Sucesión &amp; legado</span>
+        <span>Educación financiera</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ APHORISM ============ -->
+  <section class="aphorism" data-section="aphorism">
+    <div class="container">
+      <div class="aphorism-grid">
+        <div class="side">
+          <span class="eyebrow-text">— una premisa</span>
+          <p style="font-family: var(--font-sans); font-size: 14px; color: var(--ink-3); margin: 0; max-width: 26ch; line-height: 1.6;">
+            No vendo productos financieros. Diseño la cartera que sus próximos diez años necesitan, y la acompaño.
+          </p>
+        </div>
+        <div data-reveal>
+          <p class="aphorism-text">
+            Invertir no es <span class="blue">acertar</span>.<br>
+            <span class="quiet">Es</span> no equivocarse <span class="blue">dos veces</span> <span class="quiet">seguidas.</span>
+          </p>
+          <hr class="aphorism-rule">
+          <span class="aphorism-caption">Manfred Roldán · 2025</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ENFOQUE ============ -->
+  <section id="enfoque" data-section="enfoque">
+    <div class="container">
+      <div class="section-head">
+        <div class="side">
+          <span class="eyebrow-box">01 · Enfoque</span>
+          <span class="index">Proceso · <span class="accent">04 etapas</span></span>
+        </div>
+        <div>
+          <h2 class="section-title">El método. Cuatro <span class="blue">conversaciones.</span></h2>
+          <p class="body" style="margin-top: 24px;">
+            Cada relación empieza igual: cuatro encuentros — sin compromiso, sin minutas con letra pequeña — para entender qué busca, calibrar riesgo, y proponer una arquitectura. Solo entonces decidimos si seguimos.
+          </p>
+        </div>
+      </div>
+
+      <div class="approach-grid" data-reveal>
+        <div class="approach-step">
+          <span class="num">01 / Escuchar</span>
+          <div class="title">Diagnóstico</div>
+          <p class="copy">Entender qué tiene, qué le quita el sueño, qué quiere proteger y qué quiere multiplicar. Sin presentaciones de producto.</p>
+          <div class="duration">~ 90 min · sin costo</div>
+        </div>
+        <div class="approach-step">
+          <span class="num">02 / Diseñar</span>
+          <div class="title">Arquitectura</div>
+          <p class="copy">Una propuesta concreta de asignación: cuánto en renta fija, cuánto en bienes raíces, cuánto en líquido, cuánto en sucesión.</p>
+          <div class="duration">~ 2 semanas</div>
+        </div>
+        <div class="approach-step">
+          <span class="num">03 / Ejecutar</span>
+          <div class="title">Implementación</div>
+          <p class="copy">Cuentas, vehículos, documentación. Yo coordino con los socios — banca privada, fiduciarias, real estate. Usted firma.</p>
+          <div class="duration">~ 30 días</div>
+        </div>
+        <div class="approach-step">
+          <span class="num">04 / Acompañar</span>
+          <div class="title">Seguimiento</div>
+          <p class="copy">Reunión trimestral, reporte mensual, una llamada cuando el mercado se mueve. Ajustes anuales con criterio, no con pánico.</p>
+          <div class="duration">indefinido</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICIOS — main ============ -->
+  <section id="servicios" data-section="servicios">
+    <div class="container">
+      <div class="section-head">
+        <div class="side">
+          <span class="eyebrow-box">02 · Servicios</span>
+          <span class="index">Cartera · <span class="accent">04 mandatos</span></span>
+        </div>
+        <div>
+          <h2 class="section-title">Cuatro mandatos, <span class="blue">un solo criterio.</span></h2>
+          <p class="body" style="margin-top: 24px;">
+            La mayoría de los clientes contrata dos en simultáneo — planificación patrimonial siempre, y uno de los tres restantes según el horizonte. Cada mandato es independiente y revisable cada doce meses.
+          </p>
+        </div>
+      </div>
+
+      <div class="servicios-list" data-reveal>
+
+        <article class="servicio">
+          <div class="servicio-num">01</div>
+          <div class="servicio-head">
+            <span class="servicio-tag">Mandato base</span>
+            <h3 class="servicio-title">Planificación <br>patrimonial</h3>
+          </div>
+          <div class="servicio-body">
+            <p>El punto de partida. Una radiografía completa de su patrimonio actual — cuentas, propiedades, deudas, beneficiarios — y un plan a diez años con metas concretas, fechas concretas, y los vehículos para llegar.</p>
+            <ul class="servicio-incluye">
+              <li>Balance patrimonial consolidado</li>
+              <li>Mapa de flujo de efectivo</li>
+              <li>Plan de protección (seguros + fondo)</li>
+              <li>Calendario fiscal y sucesorio</li>
+            </ul>
+            <a href="#contacto" class="servicio-cta">Empezar por aquí <span class="arrow">→</span></a>
+          </div>
+          <div class="servicio-meta">
+            <div class="row"><span class="k">Mínimo</span><span class="v">US$ 100 K</span></div>
+            <div class="row"><span class="k">Horizonte</span><span class="v">5–15 años</span></div>
+            <div class="row"><span class="k">Idioma</span><span class="v">ES · EN</span></div>
+          </div>
+        </article>
+
+        <article class="servicio">
+          <div class="servicio-num">02</div>
+          <div class="servicio-head">
+            <span class="servicio-tag">Vehículo</span>
+            <h3 class="servicio-title">Inversión <br>inmobiliaria</h3>
+          </div>
+          <div class="servicio-body">
+            <p>Acceso a la familia MACAB — productos respaldados por real estate en Costa Rica que combinan flujo trimestral y revaluación del subyacente. No es para todos: tiene ventana de salida, y eso es parte del diseño.</p>
+            <ul class="servicio-incluye">
+              <li>Due diligence sobre cada cartera</li>
+              <li>Documentación legal revisada</li>
+              <li>Flujo trimestral en US$ o ₡</li>
+              <li>Reporte de avaluación anual</li>
+            </ul>
+            <a href="#contacto" class="servicio-cta">Solicitar memorándum <span class="arrow">→</span></a>
+          </div>
+          <div class="servicio-meta">
+            <div class="row"><span class="k">Mínimo</span><span class="v">US$ 50 K</span></div>
+            <div class="row"><span class="k">Horizonte</span><span class="v">3–7 años</span></div>
+            <div class="row"><span class="k">Rendimiento</span><span class="v">8–11% bruto</span></div>
+          </div>
+        </article>
+
+        <article class="servicio">
+          <div class="servicio-num">03</div>
+          <div class="servicio-head">
+            <span class="servicio-tag">Acompañamiento</span>
+            <h3 class="servicio-title">Asesoría <br>de portafolio</h3>
+          </div>
+          <div class="servicio-body">
+            <p>Para quien ya tiene posiciones — en banca privada local, brokers internacionales, fondos — y quiere una segunda lectura independiente. Reviso, sugiero, no ejecuto. La decisión final siempre es suya.</p>
+            <ul class="servicio-incluye">
+              <li>Revisión de asignación de activos</li>
+              <li>Análisis de costos y comisiones</li>
+              <li>Sugerencias de rebalanceo</li>
+              <li>Reunión trimestral · reporte mensual</li>
+            </ul>
+            <a href="#contacto" class="servicio-cta">Agendar revisión <span class="arrow">→</span></a>
+          </div>
+          <div class="servicio-meta">
+            <div class="row"><span class="k">Mínimo</span><span class="v">US$ 250 K AUM</span></div>
+            <div class="row"><span class="k">Frecuencia</span><span class="v">Trimestral</span></div>
+            <div class="row"><span class="k">Honorarios</span><span class="v">Fijos · sin comisión</span></div>
+          </div>
+        </article>
+
+        <article class="servicio">
+          <div class="servicio-num">04</div>
+          <div class="servicio-head">
+            <span class="servicio-tag">Largo plazo</span>
+            <h3 class="servicio-title">Sucesión <br>&amp; legado</h3>
+          </div>
+          <div class="servicio-body">
+            <p>Lo que pasa con su patrimonio cuando usted ya no esté ahí para decidirlo. Diseño en coordinación con abogados y notarios — fideicomisos, testamentos, vehículos sucesorios — para que la transición sea ordenada, no traumática.</p>
+            <ul class="servicio-incluye">
+              <li>Inventario de bienes y beneficiarios</li>
+              <li>Estructura fideicomisaria</li>
+              <li>Coordinación legal y notarial</li>
+              <li>Carta de intención familiar</li>
+            </ul>
+            <a href="#contacto" class="servicio-cta">Conversar en privado <span class="arrow">→</span></a>
+          </div>
+          <div class="servicio-meta">
+            <div class="row"><span class="k">Patrimonio</span><span class="v">Desde US$ 500 K</span></div>
+            <div class="row"><span class="k">Plazo de diseño</span><span class="v">4–6 meses</span></div>
+            <div class="row"><span class="k">Confidencialidad</span><span class="v">Total</span></div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TYPE WALL ============ -->
+  <section class="type-wall" data-section="wall">
+    <div class="container">
+      <div class="frame">
+        <span>03 · Premisa</span>
+        <span class="rule"></span>
+        <span>San José · CR</span>
+      </div>
+      <p class="wall-text">
+        El mejor portafolio<br>
+        <span class="quiet">no es</span> el más <em>rentable</em>.<br>
+        Es el que <em>usted</em> puede<br>
+        <span class="quiet">sostener</span> diez años.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ EN CIFRAS ============ -->
+  <section class="stats" id="cifras" data-section="cifras">
+    <div class="container">
+      <div class="section-head stats-head">
+        <div class="side">
+          <span class="eyebrow-box">04 · Resultados</span>
+          <span class="index">Práctica · <span class="accent">a marzo 2026</span></span>
+        </div>
+        <div>
+          <h2 class="section-title">En <span class="blue">cifras.</span></h2>
+          <p class="body" style="margin-top: 24px;">
+            Lo que la práctica ha hecho hasta hoy. Los números importan, pero importa más el contexto detrás — pídamelo en una conversación.
+          </p>
+        </div>
+      </div>
+
+      <div class="stats-grid" data-reveal>
+        <div class="stat">
+          <div class="label">Activos asesorados</div>
+          <div class="figure">US$ 42<span class="accent">M</span></div>
+          <p class="note">AUM consolidado entre carteras propias y co-asesoradas. Crece ~18% anual.</p>
+        </div>
+        <div class="stat">
+          <div class="label">Familias atendidas</div>
+          <div class="figure">87</div>
+          <p class="note">Relaciones activas. Retención superior al 94% año contra año.</p>
+        </div>
+        <div class="stat">
+          <div class="label">Rendimiento bruto medio</div>
+          <div class="figure">9.4<span class="unit">%</span></div>
+          <p class="note">Promedio anual ponderado, portafolios balanceados, 2019–2025.</p>
+        </div>
+        <div class="stat">
+          <div class="label">Años de práctica</div>
+          <div class="figure">12<span class="unit">años</span></div>
+          <p class="note">Desde 2014. Cinco productos atravesados con clientes acompañados.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIOS ============ -->
+  <section class="testimonios-section" id="testimonios" data-section="testimonios">
+    <div class="container">
+      <div class="section-head">
+        <div class="side">
+          <span class="eyebrow-box">05 · Testimonios</span>
+          <span class="index">Clientes · <span class="accent">en sus palabras</span></span>
+        </div>
+        <div>
+          <h2 class="section-title">Lo que <span class="blue">dicen</span> los clientes.</h2>
+          <p class="body" style="margin-top: 24px;">
+            No publico nombres completos sin permiso. Estos testimonios están reproducidos con autorización explícita, y referencias verificables pueden compartirse en privado.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="testimonios-rail" id="testimonios-rail">
+        <article class="testimonio">
+          <p class="quote">Llegué buscando un asesor. Salí con un plan. Manfred no me vendió un producto: me explicó qué tipo de patrimonio queríamos construir, y por qué.</p>
+          <div class="who">
+            <div class="avatar">M.A.</div>
+            <div class="meta">
+              <span class="name">María A.</span>
+              <span class="role">Directora médica · Escazú</span>
+            </div>
+          </div>
+        </article>
+        <article class="testimonio">
+          <p class="quote">Lo que más valoro es que cuando el mercado cae, él llama antes de que yo le marque. Eso, en finanzas, no tiene precio.</p>
+          <div class="who">
+            <div class="avatar">R.C.</div>
+            <div class="meta">
+              <span class="name">Roberto C.</span>
+              <span class="role">Empresario · Heredia</span>
+            </div>
+          </div>
+        </article>
+        <article class="testimonio">
+          <p class="quote">Trabajábamos con un banco extranjero y nos cobraban comisiones que no entendíamos. Manfred reorganizó todo en un mes. Pagamos menos, tenemos más claridad.</p>
+          <div class="who">
+            <div class="avatar">L.V.</div>
+            <div class="meta">
+              <span class="name">Familia V.</span>
+              <span class="role">Familia · Cartago</span>
+            </div>
+          </div>
+        </article>
+        <article class="testimonio">
+          <p class="quote">Tenemos tres generaciones en la misma conversación gracias a su trabajo de sucesión. Eso solo lo logra alguien que entiende familias, no solo carteras.</p>
+          <div class="who">
+            <div class="avatar">J.B.</div>
+            <div class="meta">
+              <span class="name">Jorge B.</span>
+              <span class="role">Notario · San José</span>
+            </div>
+          </div>
+        </article>
+        <article class="testimonio">
+          <p class="quote">No es un asesor que dice sí a todo. Me ha dicho que no a operaciones que yo quería hacer, con razones. Eso es lo que pago.</p>
+          <div class="who">
+            <div class="avatar">A.M.</div>
+            <div class="meta">
+              <span class="name">Andrea M.</span>
+              <span class="role">CFO · LatAm tech</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SOBRE — cream ============ -->
+  <section id="sobre" class="surface-cream" data-section="sobre">
+    <div class="container">
+      <div class="section-head">
+        <div class="side">
+          <span class="eyebrow-box">06 · Sobre Manfred</span>
+          <span class="index">Persona · <span class="accent">2014 — hoy</span></span>
+        </div>
+        <div>
+          <h2 class="section-title">La marca <span class="blue">soy yo.</span></h2>
+          <p class="body" style="margin-top: 24px;">
+            No hay equipo de marketing detrás. Cuando usted me escribe, escribe a la persona que va a ver su portafolio.
+          </p>
+        </div>
+      </div>
+
+      <div class="sobre-grid">
+        <div class="sobre-portrait">
+          <image-slot id="portrait-manfred" shape="rect" placeholder="Retrato editorial — Manfred, plano americano, fondo neutro"></image-slot>
+          <span class="tag">Manfred · 2024</span>
+        </div>
+        <div class="sobre-body">
+          <p>
+            <strong>Soy asesor patrimonial</strong> desde 2014. Trabajo desde Barrio Escalante, San José, con familias y profesionales de Costa Rica y la región que están construyendo o preservando un patrimonio que debe durar.
+          </p>
+          <p>
+            Mi formación es de finanzas — ITAM y certificación en Wealth Management — pero mi oficio es más sencillo: escuchar bien, recomendar con criterio, y acompañar cuando el mercado se complica. Soy socio de Transcomer, donde diseño la familia de productos MACAB, y trabajo con LifeMiles en programas de fidelidad patrimonial.
+          </p>
+          <p>
+            <strong>Lo que no soy:</strong> un vendedor de comisiones, un gurú de redes, ni la voz de una firma. La marca soy yo. Si algún día deja de ser así, dejaré de cobrar.
+          </p>
+          <div class="credentials">
+            <div class="credential">
+              <div class="label">Formación</div>
+              <div class="value">ITAM · CFA Lvl. II</div>
+            </div>
+            <div class="credential">
+              <div class="label">Firma</div>
+              <div class="value">Transcomer CR</div>
+            </div>
+            <div class="credential">
+              <div class="label">Licencia</div>
+              <div class="value">SUGEVAL · activa</div>
+            </div>
+            <div class="credential">
+              <div class="label">Idiomas</div>
+              <div class="value">Español · Inglés</div>
+            </div>
+          </div>
+          <div style="display:flex; gap: 16px; flex-wrap: wrap; padding-top: 16px;">
+            <a href="#contacto" class="btn btn-primary">Agendar una conversación <span>→</span></a>
+            <a href="#cifras" class="btn btn-outline">Ver resultados</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ NOTAS / BLOG ============ -->
+  <section id="notas" data-section="notas">
+    <div class="container">
+      <div class="section-head">
+        <div class="side">
+          <span class="eyebrow-box">07 · Notas</span>
+          <span class="index">Escritura · <span class="accent">recientes</span></span>
+        </div>
+        <div>
+          <h2 class="section-title">Notas <span class="blue">recientes.</span></h2>
+          <p class="body" style="margin-top: 24px;">
+            Ideas que comparto cuando vale la pena. No es un blog de tráfico — es un cuaderno público para clientes y lectores con criterio.
+          </p>
+        </div>
+      </div>
+
+      <div class="notas-grid" data-reveal>
+        <a class="nota" href="#">
+          <div class="nota-meta">
+            <span class="cat">Tesis</span>
+            <span>10 · Abr · 2026</span>
+          </div>
+          <h3 class="nota-title">Por qué los bonos en colones volvieron a tener sentido</h3>
+          <p class="nota-snippet">Con la inflación local convergiendo al 3% y las tasas del BCCR todavía por encima del 5%, hay una ventana corta — y específica — para sumar duración en moneda local.</p>
+          <span class="nota-more">Leer nota <span class="arrow">→</span></span>
+        </a>
+        <a class="nota" href="#">
+          <div class="nota-meta">
+            <span class="cat">Práctica</span>
+            <span>28 · Mar · 2026</span>
+          </div>
+          <h3 class="nota-title">Tres errores que veo en patrimonios familiares</h3>
+          <p class="nota-snippet">Cuentas a nombre del cónyuge equivocado, propiedades sin afectación familiar, y la peor de las tres: no haber hablado nunca del tema en la mesa.</p>
+          <span class="nota-more">Leer nota <span class="arrow">→</span></span>
+        </a>
+        <a class="nota" href="#">
+          <div class="nota-meta">
+            <span class="cat">Mercado</span>
+            <span>14 · Feb · 2026</span>
+          </div>
+          <h3 class="nota-title">Real estate en GAM: lo que cambió en 2025</h3>
+          <p class="nota-snippet">La oferta de renta corta saturó. La renta larga, en cambio, sigue siendo el activo más predecible de la cartera local. Las cifras y por qué.</p>
+          <span class="nota-more">Leer nota <span class="arrow">→</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA (animated) ============ -->
+  <section class="cta-animated" data-section="cta">
+    <div class="container">
+      <div class="cta-card">
+        <div class="eyebrow-box">¿Empezamos?</div>
+        <h2 class="cta-headline">
+          Su próximo paso<br>
+          <span class="accent">a criterio.</span>
+        </h2>
+        <p class="cta-sub">Una primera conversación de treinta minutos. Sin compromiso. Le respondo en veinticuatro horas hábiles.</p>
+        <a href="#contacto" class="cta-btn">Agendar consulta <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section id="faq" data-section="faq">
+    <div class="container">
+      <div class="section-head">
+        <div class="side">
+          <span class="eyebrow-box">08 · Preguntas</span>
+          <span class="index">Frecuentes · <span class="accent">06</span></span>
+        </div>
+        <div>
+          <h2 class="section-title">Lo que <span class="blue">suelen</span> preguntar.</h2>
+          <p class="body" style="margin-top: 24px;">
+            Si su pregunta no está aquí, escríbame directo. Respondo personalmente en menos de 48 horas hábiles.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-list" data-reveal>
+        <details class="faq-item">
+          <summary class="faq-q">
+            <span class="index">01</span>
+            <span class="label">¿Cuál es el monto mínimo para trabajar conmigo?</span>
+            <span class="toggle" aria-hidden="true"></span>
+          </summary>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>Depende del mandato. La planificación patrimonial empieza en US$ 100 000. La asesoría de portafolio asume al menos US$ 250 000 en activos bajo administración. Los productos inmobiliarios MACAB tienen tickets desde US$ 50 000.</p>
+            <p>El diagnóstico inicial — 90 minutos, sin compromiso — no tiene mínimo. Si después de esa conversación encajamos, conversamos los términos.</p>
+          </div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">
+            <span class="index">02</span>
+            <span class="label">¿Cobra por comisión o por honorarios fijos?</span>
+            <span class="toggle" aria-hidden="true"></span>
+          </summary>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>Honorarios fijos. Es deliberado. Cobrar por comisión introduce un incentivo que prefiero no tener: el de moverlo a usted a operar más de la cuenta. Mi compensación está atada al valor del mandato, no al volumen de transacciones.</p>
+          </div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">
+            <span class="index">03</span>
+            <span class="label">¿Qué pasa si quiero retirarme antes de tiempo?</span>
+            <span class="toggle" aria-hidden="true"></span>
+          </summary>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>Cada mandato es revisable cada doce meses y cancelable con 30 días de aviso, sin penalidad. Los productos MACAB tienen ventanas de liquidez específicas que conversamos al firmar — la liquidez es parte de la asignación, no un detalle al final.</p>
+          </div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">
+            <span class="index">04</span>
+            <span class="label">¿Trabaja con clientes fuera de Costa Rica?</span>
+            <span class="toggle" aria-hidden="true"></span>
+          </summary>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>Sí. Aproximadamente el 30% de la cartera está fuera del país — principalmente Panamá, Guatemala y EE.UU. La regulación cambia según la jurisdicción; antes de firmar conversamos qué se puede y qué no en cada caso.</p>
+          </div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">
+            <span class="index">05</span>
+            <span class="label">¿Atiende usted personalmente o tiene equipo?</span>
+            <span class="toggle" aria-hidden="true"></span>
+          </summary>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>Personalmente. Toda conversación de estrategia la llevo yo. Tengo un equipo de back-office en Transcomer que coordina ejecución y reportes, pero la persona que escucha y decide qué proponer soy yo. Esa es la promesa de marca personal — y la respeto.</p>
+          </div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">
+            <span class="index">06</span>
+            <span class="label">¿Cómo es el primer contacto?</span>
+            <span class="toggle" aria-hidden="true"></span>
+          </summary>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>Una llamada de quince minutos para entender qué busca. Si tiene sentido seguir, agendamos la sesión de diagnóstico — 90 minutos, presencial en Barrio Escalante o por videollamada. No hay presentaciones de PowerPoint. Hay preguntas, y respuestas honestas.</p>
+          </div></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACTO ============ -->
+  <section class="contacto-section" id="contacto" data-section="contacto">
+    <div class="container">
+      <div class="contacto-grid">
+        <div class="contacto-aside">
+          <span class="eyebrow-box">09 · Contacto</span>
+          <h2 class="lead">Empecemos por una <span class="blue">conversación.</span></h2>
+          <p style="font-family: var(--font-sans); font-size: 16px; line-height: 1.6; color: var(--ink-2); max-width: 38ch; margin: 0;">
+            Quince minutos para escucharlo. Sin presentación de producto, sin compromiso. Si hay encaje, seguimos.
+          </p>
+
+          <div class="channel-list">
+            <div class="channel">
+              <span class="k">Correo</span>
+              <a class="v" href="mailto:hola@manfredroldan.com">hola@manfredroldan.com</a>
+            </div>
+            <div class="channel">
+              <span class="k">WhatsApp</span>
+              <a class="v" href="https://wa.me/50688881234">+506 8888 · 1234</a>
+            </div>
+            <div class="channel">
+              <span class="k">Oficina</span>
+              <span class="v">Barrio Escalante · CR</span>
+            </div>
+            <div class="channel">
+              <span class="k">Horario</span>
+              <span class="v">L–V · 8:00 — 17:00 CST</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <div class="form-tabs" role="tablist">
+            <button type="button" class="form-tab active" data-tab="agendar" role="tab">Agendar consulta</button>
+            <button type="button" class="form-tab" data-tab="memorandum" role="tab">Solicitar memorándum</button>
+          </div>
+
+          <form id="contact-form" novalidate>
+            <div class="field-row">
+              <div class="field" data-name="nombre">
+                <label for="f-nombre">Nombre completo</label>
+                <input type="text" id="f-nombre" name="nombre" placeholder="Su nombre" required minlength="2">
+                <span class="err">Indique su nombre.</span>
+              </div>
+              <div class="field" data-name="email">
+                <label for="f-email">Correo electrónico</label>
+                <input type="email" id="f-email" name="email" placeholder="usted@dominio.com" required>
+                <span class="err">Correo inválido.</span>
+              </div>
+            </div>
+            <div class="field-row" style="margin-top: 24px;">
+              <div class="field" data-name="telefono">
+                <label for="f-tel">Teléfono · WhatsApp</label>
+                <input type="tel" id="f-tel" name="telefono" placeholder="+506 0000 0000">
+                <span class="err">Teléfono inválido.</span>
+              </div>
+              <div class="field" data-name="mandato">
+                <label for="f-mandato">Mandato de interés</label>
+                <select id="f-mandato" name="mandato" required>
+                  <option value="">Seleccione…</option>
+                  <option>Planificación patrimonial</option>
+                  <option>Inversión inmobiliaria · MACAB</option>
+                  <option>Asesoría de portafolio</option>
+                  <option>Sucesión &amp; legado</option>
+                  <option>Aún no estoy seguro</option>
+                </select>
+                <span class="err">Elija un mandato.</span>
+              </div>
+            </div>
+            <div class="field" data-name="mensaje" style="margin-top: 24px;">
+              <label for="f-msg">Cuéntame brevemente</label>
+              <textarea id="f-msg" name="mensaje" placeholder="¿Qué le gustaría conversar? Una o dos líneas bastan."></textarea>
+              <span class="err">Escriba un breve mensaje.</span>
+            </div>
+
+            <div class="form-submit">
+              <button type="submit" class="btn btn-primary">Enviar mensaje <span>→</span></button>
+              <span class="form-status" id="form-status"></span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="mark">
+        <div class="mono"><img src="assets/logo-monogram.png" alt="Manfred Roldán"></div>
+        <p class="desc">Asesoría patrimonial personal. Costa Rica y la región. <em style="color:var(--cobalt); font-style:normal;">Su patrimonio, con criterio.</em></p>
+      </div>
+      <div>
+        <h5>Servicios</h5>
+        <ul>
+          <li><a href="#servicios">Patrimonial</a></li>
+          <li><a href="#servicios">Inmobiliario</a></li>
+          <li><a href="#servicios">Portafolio</a></li>
+          <li><a href="#servicios">Sucesión</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Práctica</h5>
+        <ul>
+          <li><a href="#enfoque">Enfoque</a></li>
+          <li><a href="#cifras">Resultados</a></li>
+          <li><a href="#notas">Notas</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contacto</h5>
+        <ul>
+          <li><a href="mailto:hola@manfredroldan.com">Correo</a></li>
+          <li><a href="https://wa.me/50688881234">WhatsApp</a></li>
+          <li><a href="https://instagram.com/manfred.roldan">Instagram</a></li>
+          <li><a href="https://linkedin.com/in/manfredroldan">LinkedIn</a></li>
+        </ul>
+      </div>
+      <div class="newsletter-footer">
+        <h5>Carta mensual</h5>
+        <p>Una nota al mes, los primeros viernes. Sin spam. Cancele cuando quiera.</p>
+        <form id="newsletter-form" novalidate>
+          <input type="email" placeholder="su.correo@dominio.com" name="email" required>
+          <button type="submit">Suscribirse →</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 · Manfred Roldán · Todos los derechos reservados</span>
+      <span>SUGEVAL · Costa Rica</span>
+    </div>
+  </div>
+</footer>
+
+<script src="image-slot.js"></script>
+
+<!-- Page behavior: sticky nav, scroll-active, FAQ accordion, form validation, reveal -->
+<script>
+(() => {
+  const nav = document.getElementById('nav');
+  const links = document.querySelectorAll('.nav-links a');
+  const sections = document.querySelectorAll('section[data-section]');
+  const onScroll = () => {
+    if (window.scrollY > 8) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // scroll-active: pick the section closest to top within the viewport
+  const sectionMap = new Map();
+  sections.forEach(s => {
+    const id = s.getAttribute('id') || s.dataset.section;
+    sectionMap.set(s, id);
+  });
+  const linkByHref = new Map();
+  links.forEach(a => {
+    const h = a.getAttribute('href');
+    if (h && h.startsWith('#')) linkByHref.set(h.slice(1), a);
+  });
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = sectionMap.get(e.target);
+        // Map section data-section to nav anchor when possible
+        const navId = ({
+          'hero': 'servicios',
+          'aphorism': 'servicios',
+          'wall': 'servicios',
+          'enfoque': 'enfoque',
+          'servicios': 'servicios',
+          'cifras': 'cifras',
+          'testimonios': 'sobre',
+          'sobre': 'sobre',
+          'notas': 'notas',
+          'faq': 'faq',
+          'contacto': 'faq'
+        })[id] || id;
+        links.forEach(a => a.classList.remove('active'));
+        const target = linkByHref.get(navId);
+        if (target) target.classList.add('active');
+      }
+    });
+  }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
+  sections.forEach(s => io.observe(s));
+
+  // FAQ accordion — controlled height for animation
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isOpen = item.hasAttribute('open');
+      // Close others
+      document.querySelectorAll('.faq-item').forEach(other => {
+        if (other !== item && other.hasAttribute('open')) {
+          other.removeAttribute('open');
+          other.classList.remove('open');
+          const oa = other.querySelector('.faq-a');
+          if (oa) oa.style.maxHeight = '0px';
+        }
+      });
+      if (isOpen) {
+        item.removeAttribute('open');
+        item.classList.remove('open');
+        a.style.maxHeight = '0px';
+      } else {
+        item.setAttribute('open', '');
+        item.classList.add('open');
+        a.style.maxHeight = (a.scrollHeight + 16) + 'px';
+      }
+    });
+  });
+
+  // Form-tabs (visual only — both submit through same form)
+  document.querySelectorAll('.form-tab').forEach(t => {
+    t.addEventListener('click', () => {
+      document.querySelectorAll('.form-tab').forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+    });
+  });
+
+  // Contact form validation
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('form-status');
+  const validators = {
+    nombre: v => v.trim().length >= 2,
+    email: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()),
+    telefono: v => v.trim() === '' || /^[+\d\s\-().]{7,}$/.test(v.trim()),
+    mandato: v => v.trim().length > 0,
+    mensaje: v => true
+  };
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let ok = true;
+    form.querySelectorAll('.field').forEach(f => {
+      const name = f.dataset.name;
+      const input = f.querySelector('input, textarea, select');
+      const fn = validators[name];
+      if (fn && !fn(input.value || '')) { f.classList.add('error'); ok = false; }
+      else { f.classList.remove('error'); }
+    });
+    if (!ok) {
+      status.textContent = 'Revise los campos marcados.';
+      status.classList.add('bad');
+      return;
+    }
+    status.classList.remove('bad');
+    status.textContent = 'Mensaje enviado. Le respondo en menos de 48 horas.';
+    form.reset();
+  });
+
+  // Newsletter form validation
+  const nf = document.getElementById('newsletter-form');
+  if (nf) {
+    nf.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const inp = nf.querySelector('input[type=email]');
+      const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inp.value.trim());
+      if (!ok) {
+        inp.style.borderColor = 'var(--critical)';
+        inp.focus();
+        return;
+      }
+      inp.style.borderColor = 'var(--positive)';
+      const btn = nf.querySelector('button');
+      btn.textContent = 'Inscrito ✓';
+      btn.disabled = true;
+    });
+  }
+
+  // Reveal-on-scroll
+  const rio = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rio.unobserve(e.target); } });
+  }, { rootMargin: "0px 0px -10% 0px", threshold: 0.05 });
+  document.querySelectorAll('[data-reveal]').forEach(el => rio.observe(el));
+})();
+</script>
+
+</body>
+</html>
