@@ -151,9 +151,9 @@
   .hero-headline {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(72px, 14vw, 220px);
-    line-height: 0.86;
-    letter-spacing: -0.035em;
+    font-size: clamp(56px, 10vw, 156px);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
     text-transform: uppercase;
     margin: 0 0 32px;
     color: var(--white);
@@ -302,9 +302,9 @@
   .aphorism-text {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(40px, 6vw, 88px);
-    line-height: 0.98;
-    letter-spacing: -0.025em;
+    font-size: clamp(32px, 4.8vw, 68px);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
     text-transform: uppercase;
     color: var(--white);
     margin: 0;
@@ -357,9 +357,9 @@
   .section-title {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(48px, 7vw, 116px);
-    line-height: 0.92;
-    letter-spacing: -0.03em;
+    font-size: clamp(36px, 5vw, 84px);
+    line-height: 0.96;
+    letter-spacing: -0.025em;
     text-transform: uppercase;
     color: var(--white);
     margin: 0;
@@ -449,9 +449,9 @@
   .servicio-num {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(48px, 5vw, 80px);
+    font-size: clamp(40px, 4vw, 64px);
     line-height: 0.9;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.025em;
     color: var(--ink-3);
     transition: color var(--dur-base) var(--ease-out-quint);
   }
@@ -467,9 +467,9 @@
   .servicio-title {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(28px, 3vw, 44px);
-    line-height: 0.98;
-    letter-spacing: -0.02em;
+    font-size: clamp(24px, 2.4vw, 34px);
+    line-height: 1.0;
+    letter-spacing: -0.015em;
     text-transform: uppercase;
     color: var(--white);
     margin: 0;
@@ -551,9 +551,9 @@
   .type-wall .wall-text {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(56px, 9vw, 160px);
-    line-height: 0.92;
-    letter-spacing: -0.035em;
+    font-size: clamp(40px, 6.5vw, 116px);
+    line-height: 0.96;
+    letter-spacing: -0.03em;
     text-transform: uppercase;
     color: var(--white);
     margin: 0;
@@ -585,9 +585,9 @@
   .stat .figure {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(60px, 7vw, 104px);
-    line-height: 0.9;
-    letter-spacing: -0.035em;
+    font-size: clamp(48px, 5.5vw, 80px);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
     color: var(--white);
   }
   .stat .figure .accent { color: var(--cobalt); }
@@ -714,8 +714,18 @@
     gap: 80px;
     align-items: start;
   }
-  .sobre-portrait { aspect-ratio: 4/5; position: relative; overflow: hidden; background: rgba(14,13,44,0.05); }
-  .sobre-portrait-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .sobre-portrait {
+    aspect-ratio: 4/5;
+    position: relative;
+    overflow: hidden;
+    background-color: rgba(14,13,44,0.04);
+    background-image: repeating-linear-gradient(135deg,
+      rgba(14,13,44,0.04) 0,
+      rgba(14,13,44,0.04) 14px,
+      rgba(14,13,44,0.11) 14px,
+      rgba(14,13,44,0.11) 28px);
+  }
+  .sobre-portrait-img { width: 100%; height: 100%; object-fit: cover; display: block; position: relative; z-index: 1; }
   .sobre-portrait .tag {
     position: absolute; bottom: 16px; left: 16px;
     font-family: var(--font-display); font-size: 10px;
@@ -907,9 +917,9 @@
   .contacto-aside .lead {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(36px, 4vw, 60px);
-    line-height: 0.96;
-    letter-spacing: -0.025em;
+    font-size: clamp(28px, 3.2vw, 48px);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
     text-transform: uppercase;
     color: var(--white);
     margin: 0;
@@ -1179,9 +1189,9 @@
   .cta-headline {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(48px, 6vw, 88px);
-    line-height: 0.96;
-    letter-spacing: -0.03em;
+    font-size: clamp(38px, 4.8vw, 68px);
+    line-height: 1.0;
+    letter-spacing: -0.025em;
     text-transform: uppercase;
     margin: 0 0 24px;
     max-width: 14ch;
